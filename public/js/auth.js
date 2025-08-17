@@ -1,29 +1,46 @@
-function saveToken(t){ localStorage.setItem('token', t); }
-function token(){ return localStorage.getItem('token') || ''; }
-function api(path, opt={}){ return fetch('/api'+path,{...opt, headers:{'Content-Type':'application/json', Authorization:'Bearer '+token(), ...(opt.headers||{})}}).then(r=>r.json()); }
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
 
-// Login
-const loginForm = document.getElementById('loginForm');
-if (loginForm){
-  loginForm.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(loginForm));
-    const res = await api('/auth/login',{ method:'POST', body: JSON.stringify(data) });
-    if(res.token){ saveToken(res.token); location.href = '/dashboard.html'; } else alert(res.error||'Login failed');
-  });
-}
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        window.location.href = '/dashboard.html';
+      } else {
+        alert(data.error);
+      }
+    });
+  }
 
-// Signup
-const signupForm = document.getElementById('signupForm');
-if (signupForm){
-  signupForm.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(signupForm));
-    const res = await api('/auth/signup',{ method:'POST', body: JSON.stringify(data) });
-    if(res.token){ saveToken(res.token); location.href = '/dashboard.html'; } else alert(res.error||'Signup failed');
-  });
-}
-
-// Logout (on pages that have it)
-const logout = document.getElementById('logout');
-if (logout){ logout.addEventListener('click', ()=>{ localStorage.removeItem('token'); location.href = '/'; }); }
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const college = document.getElementById('college').value;
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, college }),
+      });
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        window.location.href = '/dashboard.html';
+      } else {
+        alert(data.error);
+      }
+    });
+  }
+});

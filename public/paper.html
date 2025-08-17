@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paper • PaperLink</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paper Details • PaperLink</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <canvas id="bg"></canvas>
   <nav class="glass nav">
-    <div class="brand">PaperLink</div>
+    <div class="brand"><a href="/dashboard.html">PaperLink</a></div>
+    <div class="links">
+        <a href="/upload.html">Upload</a>
+        <a href="/admin.html" id="admin-link" style="display: none;">Admin</a>
+        <a href="#" id="logout" class="btn ghost">Logout</a>
+    </div>
   </nav>
-  <main class="container">
-    <section id="paperCard" class="glass"></section>
-    <section class="glass">
+
+  <div class="container">
+    <div id="paper-details" class="item glass"></div>
+    <div class="chat glass">
       <h3>Discussion</h3>
-      <div id="chat" class="chat"></div>
-      <form id="chatForm" class="row">
-        <input id="msg" placeholder="Write a comment" />
-        <button class="btn" type="submit">Send</button>
+      <div id="chat-messages"></div>
+      <form id="chat-form">
+        <input type="text" id="chat-input" placeholder="Type your message..." />
+        <button type="submit" class="btn">Send</button>
       </form>
-    </section>
-  </main>
-  <script src="js/bg.js"></script>
+    </div>
+  </div>
+
+  <div id="toasts"></div>
+
   <script src="js/paper.js"></script>
+  <script src="js/bg.js"></script>
 </body>
 </html>

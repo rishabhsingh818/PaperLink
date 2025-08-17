@@ -1,31 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin • PaperLink</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard • PaperLink</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <canvas id="bg"></canvas>
   <nav class="glass nav">
-    <div class="brand">Admin • PaperLink</div>
+    <div class="brand"><a href="/dashboard.html">PaperLink</a></div>
+    <div class="links">
+        <a href="/upload.html">Upload</a>
+        <a href="#" id="logout" class="btn ghost">Logout</a>
+    </div>
   </nav>
-  <main class="container">
-    <section class="glass" id="stats"></section>
-    <section class="glass">
-      <h2>Pending Approvals</h2>
-      <div id="pending" class="grid"></div>
-    </section>
-    <section class="glass">
-      <h2>User Verifications</h2>
-      <div id="verifs" class="grid"></div>
-    </section>
-    <section class="glass">
-      <a class="btn" id="export" href="#">Export CSV</a>
-    </section>
-  </main>
-  <script src="js/bg.js"></script>
+
+  <div class="container">
+    <h2>Pending Approvals</h2>
+    <div id="pending-papers" class="grid"></div>
+  </div>
+
   <script src="js/admin.js"></script>
+  <script src="js/bg.js"></script>
 </body>
 </html>

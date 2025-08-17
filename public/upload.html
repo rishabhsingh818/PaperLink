@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload • PaperLink</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Paper • PaperLink</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <canvas id="bg"></canvas>
   <nav class="glass nav">
-    <div class="brand">PaperLink</div>
+    <div class="brand"><a href="/dashboard.html">PaperLink</a></div>
+    <div class="links">
+        <a href="/admin.html" id="admin-link" style="display: none;">Admin</a>
+        <a href="#" id="logout" class="btn ghost">Logout</a>
+    </div>
   </nav>
-  <main class="container">
-    <section class="glass">
+
+  <div class="container">
+    <div class="auth glass">
       <h2>Upload Paper</h2>
-      <form id="uploadForm">
-        <input name="title" placeholder="Title" required>
-        <textarea name="abstract" placeholder="Abstract" required></textarea>
-        <input name="tags" placeholder="Tags (comma separated)">
-        <input name="file" type="file" accept="application/pdf">
-        <button class="btn" type="submit">Submit for Approval</button>
+      <form id="upload-form">
+        <input type="text" id="title" placeholder="Paper Title" required />
+        <textarea id="abstract" placeholder="Abstract" required></textarea>
+        <input type="text" id="tags" placeholder="Tags (comma-separated)" />
+        <input type="file" id="file" required />
+        <button type="submit" class="btn">Submit for Approval</button>
       </form>
-    </section>
-  </main>
-  <script src="js/bg.js"></script>
+    </div>
+  </div>
+
   <script src="js/upload.js"></script>
+  <script src="js/bg.js"></script>
 </body>
 </html>
