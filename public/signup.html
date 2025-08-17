@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up • PaperLink</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <main class="auth glass">
+    <h2>Create your account</h2>
+    <form id="signupForm">
+      <input name="name" placeholder="Full Name" required>
+      <input name="email" type="email" placeholder="Email" required>
+      <input name="college" placeholder="College / Organization" required>
+      <input name="password" type="password" placeholder="Password" required>
+      <button class="btn" type="submit">Create Account</button>
+    </form>
+    <p class="muted">Have an account? <a href="/login.html">Login</a></p>
+  </main>
+  <script src="js/bg.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

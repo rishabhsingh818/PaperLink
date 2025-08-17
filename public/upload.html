@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload • PaperLink</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <nav class="glass nav">
+    <div class="brand">PaperLink</div>
+  </nav>
+  <main class="container">
+    <section class="glass">
+      <h2>Upload Paper</h2>
+      <form id="uploadForm">
+        <input name="title" placeholder="Title" required>
+        <textarea name="abstract" placeholder="Abstract" required></textarea>
+        <input name="tags" placeholder="Tags (comma separated)">
+        <input name="file" type="file" accept="application/pdf">
+        <button class="btn" type="submit">Submit for Approval</button>
+      </form>
+    </section>
+  </main>
+  <script src="js/bg.js"></script>
+  <script src="js/upload.js"></script>
+</body>
+</html>
