@@ -82,7 +82,7 @@ body{
 }
 .btn-light:hover{box-shadow:0 12px 30px rgba(0,0,0,.36)}
 /* Ensure nav buttons keep black text on light gradient */
-.nav .btn-light{ color:#0b0d10; opacity:1; }
+.nav .btn-light{ color:#0b0d10!important; opacity:1; font-weight:800; }
 
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:16px;margin:0 16px 60px}
 .card{padding:18px}
