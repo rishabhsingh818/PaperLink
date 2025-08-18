@@ -25,52 +25,87 @@ body{
 /* Liquid glass black cards */
 .glass{
   position:relative;
-  /* softer frosted glass over black */
-  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
-  border: 1px solid rgba(255,255,255,.18);
-  box-shadow: 0 14px 28px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.06);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
-  border-radius: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* A more subtle, refined glass effect */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
+/* A sharp, angled glare */
 .glass::before{
-  /* softer highlight bloom */
-  content:""; position:absolute; inset:1px; border-radius:inherit; pointer-events:none;
-  background: radial-gradient(120% 120% at 12% 10%, rgba(255,255,255,.18), transparent 42%);
-  mix-blend-mode: screen; opacity:.35; filter: blur(12px);
+  content:""; position:absolute; top:0; left:0;
+  width: 70%; height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(110deg, rgba(255,255,255,.15) 0%, transparent 50%);
+  opacity: .8;
+  pointer-events: none;
 }
+
+/* A soft, ambient glow from the bottom */
 .glass::after{
-  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-  background: linear-gradient(120deg, rgba(255,255,255,.10), transparent 42%, rgba(255,255,255,.06) 66%, transparent 86%);
-  mix-blend-mode: screen; opacity:.30; filter: blur(12px);
+  content:""; position:absolute; bottom:0; right:0;
+  width: 100%; height: 100%;
+  border-radius: inherit;
+  background: radial-gradient(circle at 80% 90%, rgba(255,255,255,.1), transparent 40%);
+  opacity: .7;
+  pointer-events: none;
+}
+
+/* Interactive lift effect for cards */
+.card.glass:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.45);
 }
 
 .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;margin:16px}
-.brand{font-weight:800;letter-spacing:.8px;font-size:32px;line-height:1; font-family:'Sora','Poppins',system-ui,Segoe UI,Roboto,Arial;}
+.brand{
+  font-family:'Sora', 'Poppins', system-ui, Segoe UI, Roboto, Arial;
+  font-size: 36px; /* Increased from 32px */
+  font-weight: 800; /* Kept at a strong bold weight */
+  letter-spacing: 1px; /* Slightly increased for clarity */
+  line-height: 1;
+}
 .brand, .brand a{
   text-decoration:none;
   background: linear-gradient(90deg,#ffffff 0%, #c7d2fe 55%, #e5e7eb 100%);
   -webkit-background-clip:text; background-clip:text; color:transparent;
   text-shadow: 0 2px 14px rgba(29,78,216,.25);
+  transition: opacity 0.3s ease;
 }
+.brand:hover, .brand a:hover {
+  opacity: 0.85;
+}
+
 .nav .links{display:flex;gap:14px;align-items:center}
-.nav .links a{color:var(--text);text-decoration:none;opacity:.9}
+.nav .links a{color:var(--text);text-decoration:none;opacity:.9; transition: color 0.3s ease, opacity 0.3s ease;}
+.nav .links a:hover {
+  color: #fff;
+  opacity: 1;
+}
 
 /* Social icons */
 .social{display:flex;gap:10px;align-items:center;margin-left:8px}
-.social a{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:0 6px 16px rgba(0,0,0,.25);opacity:.95;transition:transform .15s ease, box-shadow .2s ease, opacity .2s}
-.social a:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,.32);opacity:1}
+.social a{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:0 6px 16px rgba(0,0,0,.25);opacity:.95;transition:transform .2s ease, box-shadow .2s ease, opacity .2s, background .2s ease}
+.social a:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 10px 22px rgba(0,0,0,.32);opacity:1; background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.06));}
 .social svg{width:18px;height:18px;display:block}
 
 .hero{padding:120px 24px;text-align:center}
-.hero h1{font-size:56px;margin:0;line-height:1.05;background:linear-gradient(90deg,#ffffff 0%, #9fb7ff 35%, #dbe7ff 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{max-width:720px;margin:12px auto 24px;color:var(--muted)}
-.cta{display:flex;gap:14px;justify-content:center}
+.hero h1{font-size:56px;margin:0;line-height:1.05;background:linear-gradient(90deg,#ffffff 0%, #9fb7ff 35%, #dbe7ff 70%);-webkit-background-clip:text;background-clip:text;color:transparent; animation: fadeInDown 1s ease-out;}
+.hero p{max-width:720px;margin:12px auto 24px;color:var(--muted); animation: fadeInUp 1s ease-out 0.2s; animation-fill-mode: backwards;}
+.cta{display:flex;gap:14px;justify-content:center; animation: fadeInUp 1s ease-out 0.4s; animation-fill-mode: backwards;}
 
-.btn{padding:10px 16px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;text-decoration:none;border:1px solid rgba(255,255,255,.08);font-weight:700;letter-spacing:.2px;box-shadow:0 8px 26px rgba(29,78,216,.35);cursor:pointer;transition:transform .15s ease, box-shadow .2s ease, opacity .2s}
-.btn:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(29,78,216,.45)}
+.btn{padding:10px 16px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;text-decoration:none;border:1px solid rgba(255,255,255,.08);font-weight:700;letter-spacing:.2px;box-shadow:0 8px 26px rgba(29,78,216,.35);cursor:pointer;transition:transform .2s ease, box-shadow .2s ease, opacity .2s, background .3s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(29,78,216,.45)}
 .btn:active{transform:translateY(0)}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.18);color:var(--text)}
+.btn.ghost:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.25);
+}
 
 /* Brand white-stone gradient buttons with black text */
 .btn-light{
@@ -80,16 +115,16 @@ body{
   box-shadow: 0 8px 22px rgba(0,0,0,.28);
   font-weight: 800;
 }
-.btn-light:hover{box-shadow:0 12px 30px rgba(0,0,0,.36)}
+.btn-light:hover{box-shadow:0 12px 30px rgba(0,0,0,.36); transform: translateY(-2px);}
 /* Ensure nav buttons keep black text on light gradient */
 .nav .btn-light{ color:#0b0d10!important; opacity:1; font-weight:800; }
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:16px;margin:0 16px 60px}
-.card{padding:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;padding:16px;margin:0 16px 60px}
+.card{padding:22px; transition: all 0.3s ease-out;}
 .footer{margin:32px 16px; padding:8px 0; text-align:center; color:var(--muted); font-size:12px}
 
 .container{max-width:1100px;margin:90px auto 60px;padding:0 16px}
-.search{display:grid;grid-template-columns:1fr 180px 160px auto;gap:10px;padding:14px}
+.search{display:grid;grid-template-columns:1fr 180px 160px auto;gap:12px;padding:16px; align-items: center;}
 #results .item{padding:16px}
 .item h4{margin:0 0 6px 0}
 .item .meta{color:var(--muted);font-size:12px}
@@ -97,10 +132,10 @@ body{
 .chat{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow:auto}
 .msg{padding:10px;border-left:3px solid #274690;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border-radius:8px}
 
-.auth{max-width:480px;margin:120px auto;padding:28px}
-.auth form{display:flex;flex-direction:column;gap:12px}
-input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.035));color:var(--text);outline:none;transition:border-color .15s ease, background .2s}
-input:focus,select:focus,textarea:focus{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06)}
+.auth{max-width:480px;margin:120px auto;padding:32px}
+.auth form{display:flex;flex-direction:column;gap:16px}
+input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.035));color:var(--text);outline:none;transition:border-color .2s ease, background .2s, box-shadow .2s ease}
+input:focus,select:focus,textarea:focus{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.08); box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.3);}
 textarea{min-height:120px}
 .muted{color:var(--muted)}
 
@@ -115,7 +150,7 @@ textarea{min-height:120px}
 .auth input::placeholder,
 .auth textarea::placeholder{
   color: var(--text);
-  opacity: .9;
+  opacity: .8;
 }
 
 /* Match select dropdown with theme: remove native arrow, add custom */
@@ -146,4 +181,27 @@ select option[value=""]{ color:#94a3b8; }
 @media (max-width:720px){
   .hero h1{font-size:38px}
   .search{grid-template-columns:1fr;}
+}
+
+/* Keyframe animations for smooth entrances */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
