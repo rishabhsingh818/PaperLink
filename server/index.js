@@ -32,9 +32,9 @@ export const db = {
   approvals: []
 };
 
-// seed default admin for demo
-if (!db.users.find(u => u.email === 'admin@paper.link')) {
-  db.users.push({ id: 'admin-1', name: 'Admin', email: 'admin@paper.link', password: 'admin123', role: 'admin', college: 'PaperLink HQ', createdAt: Date.now(), verified: true });
+// seed default admin for demo (as requested)
+if (!db.users.find(u => u.email === 'admin@paper.com')) {
+  db.users.push({ id: 'admin-1', name: 'Admin', email: 'admin@paper.com', password: 'Admin@123', role: 'admin', college: 'PaperLink HQ', createdAt: Date.now(), verified: true });
 }
 
 app.use('/api/auth', authRoutes);

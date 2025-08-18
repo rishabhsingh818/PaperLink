@@ -5,26 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Upload Paper • PaperLink</title>
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/authGuard.js"></script>
 </head>
 <body>
   <canvas id="bg"></canvas>
   <nav class="nav">
   <div class="brand"><a href="/dashboard.html">PaperLink</a></div>
     <div class="links">
-        <a href="/admin.html" id="admin-link" style="display: none;">Admin</a>
+  <a href="/login.html?next=%2Fadmin.html" id="admin-link">Admin</a>
         <a href="#" id="logout" class="btn ghost">Logout</a>
     </div>
   </nav>
 
   <div class="container">
-    <div class="auth glass">
+    <div class="auth glass reveal">
       <h2>Upload Paper</h2>
       <form id="upload-form">
         <input type="text" id="subject" placeholder="Subject" required />
-        <select id="semester" required>
+  <select id="semester" class="custom-list" required>
           <option value="" disabled selected>Semester</option>
         </select>
-        <select id="exam" required>
+  <select id="exam" class="custom-list" required>
           <option value="" disabled selected>Exam</option>
           <option value="Midsem">Midsem</option>
           <option value="Endsem">Endsem</option>
@@ -41,7 +42,9 @@
 
   <footer class="footer">© 2025 PaperLink. All rights reserved.</footer>
 
+  <script src="js/customList.js"></script>
   <script src="js/upload.js"></script>
+  <script src="js/reveal.js"></script>
   <script src="js/bg.js"></script>
 </body>
 </html>

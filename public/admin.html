@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard • PaperLink</title>
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/authGuard.js"></script>
 </head>
 <body>
   <canvas id="bg"></canvas>
@@ -17,13 +18,14 @@
   </nav>
 
   <div class="container">
-    <h2>Pending Approvals</h2>
-    <div id="pending-papers" class="grid"></div>
+    <h2 class="reveal" style="margin-bottom:16px">Pending Approvals</h2>
+    <div id="pending-papers" class="grid reveal" style="grid-template-columns:1fr; gap:16px;"></div>
   </div>
 
   <footer class="footer">© 2025 PaperLink. All rights reserved.</footer>
 
   <script src="js/admin.js"></script>
+  <script src="js/reveal.js"></script>
   <script src="js/bg.js"></script>
 </body>
 </html>

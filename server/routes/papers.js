@@ -90,6 +90,8 @@ r.post('/admin/:id/approve', requireAdmin, (req, res) => {
   const p = db.approvals.splice(idx, 1)[0];
   p.status = 'approved';
   db.papers.push(p);
+  // Notify all users that a new paper is available
+  db.notifications.push({ id: Date.now()+'', to: 'all', text: `New paper approved: ${p.title}`, at: Date.now() });
   res.json({ ok: true, paper: p });
 });
 

@@ -13,15 +13,25 @@ document.addEventListener('DOMContentLoaded', () => {
     return res.json();
   }
 
-  function fillSemestersForYear(year) {
-    const map = {
-      1: ['1', '2'],
-      2: ['3', '4'],
-      3: ['5', '6'],
-      4: ['7', '8']
+  // Overwrite previous logic: always show all 1–8 semesters
+  function fillSemesters() {
+    const opts = ['1','2','3','4','5','6','7','8'];
+    const suf = (n) => {
+      if (n === 11 || n === 12 || n === 13) return 'th';
+      const d = n % 10;
+      if (d === 1) return 'st';
+      if (d === 2) return 'nd';
+      if (d === 3) return 'rd';
+      return 'th';
     };
-    const opts = map[Number(year)] || [];
-  semesterSelect.innerHTML = '<option value="" disabled selected>Semester</option>' + opts.map(s => `<option value="${s}">${s}${s==='1'?'st':s==='2'?'nd':s==='3'?'rd':'th'} Semester</option>`).join('');
+    semesterSelect.innerHTML = '<option value="" disabled selected>Semester</option>' +
+      opts.map(s => {
+        const n = Number(s);
+        return `<option value="${s}">${n}${suf(n)} Sem</option>`;
+      }).join('');
+    if (window.customList) {
+      window.customList.refresh(semesterSelect);
+    }
   }
 
   // Themed file picker interactions
@@ -73,10 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (user && user.role === 'admin') {
         adminLink.style.display = 'inline';
     }
-    if (user && user.year) {
-      fillSemestersForYear(user.year);
-    }
+    // Semesters are always filled now; no dependency on user.year
   }
 
+  // Fill semesters immediately so dropdown always has values
+  fillSemesters();
   checkAdmin();
 });
