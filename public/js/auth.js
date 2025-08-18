@@ -29,10 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       const college = document.getElementById('college').value;
+      const department = document.getElementById('department').value;
+      const course = document.getElementById('course').value;
+  const academicYear = document.getElementById('academicYear').value;
+  const year = document.getElementById('year')?.value;
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, college }),
+  body: JSON.stringify({ name, email, password, college, department, course, academicYear, year }),
       });
       const data = await res.json();
       if (data.token) {

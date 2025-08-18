@@ -9,12 +9,19 @@ const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 
 
 // Create paper (goes to approval queue)
 r.post('/', requireAuth, upload.single('file'), (req, res) => {
-  const { title, abstract, tags } = req.body;
+  const { subject, semester, exam, title, abstract, tags } = req.body;
+  // Normalize: support new fields; keep legacy fields if provided
+  const derivedTitle = title || [subject, exam, semester ? `Sem ${semester}` : ''].filter(Boolean).join(' • ');
+  const derivedAbstract = abstract || `Subject: ${subject || ''} | Exam: ${exam || ''} | Semester: ${semester || ''}`.trim();
+  const parsedTags = tags ? (tags || '').split(',').map(t => t.trim()).filter(Boolean) : [];
   const paper = {
     id: nanoid(),
-    title,
-    abstract,
-    tags: (tags || '').split(',').map(t => t.trim()).filter(Boolean),
+    title: derivedTitle,
+    abstract: derivedAbstract,
+    subject: subject || null,
+    semester: semester || null,
+    exam: exam || null,
+    tags: parsedTags,
     authorId: req.user.id,
     status: 'pending',
     fileName: req.file?.originalname || null,

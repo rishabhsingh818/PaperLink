@@ -8,8 +8,8 @@
 </head>
 <body>
   <canvas id="bg"></canvas>
-  <nav class="glass nav">
-    <div class="brand"><a href="/dashboard.html">PaperLink</a></div>
+  <nav class="nav">
+    <div class="brand">PaperLink</div>
     <div class="links">
         <a href="/admin.html" id="admin-link" style="display: none;">Admin</a>
         <a href="#" id="logout" class="btn ghost">Logout</a>
@@ -20,14 +20,26 @@
     <div class="auth glass">
       <h2>Upload Paper</h2>
       <form id="upload-form">
-        <input type="text" id="title" placeholder="Paper Title" required />
-        <textarea id="abstract" placeholder="Abstract" required></textarea>
-        <input type="text" id="tags" placeholder="Tags (comma-separated)" />
-        <input type="file" id="file" required />
-        <button type="submit" class="btn">Submit for Approval</button>
+        <input type="text" id="subject" placeholder="Subject" required />
+        <select id="semester" required>
+          <option value="" disabled selected>Semester</option>
+        </select>
+        <select id="exam" required>
+          <option value="" disabled selected>Exam</option>
+          <option value="Midsem">Midsem</option>
+          <option value="Endsem">Endsem</option>
+        </select>
+        <div class="filepicker">
+          <input type="file" id="file" class="visually-hidden" required />
+          <button type="button" id="file-trigger" class="btn btn-light">Choose File</button>
+          <span id="file-name" class="file-name">No file chosen</span>
+        </div>
+  <button type="submit" class="btn btn-light">Submit for Approval</button>
       </form>
     </div>
   </div>
+
+  <footer class="footer">© 2025 PaperLink. All rights reserved.</footer>
 
   <script src="js/upload.js"></script>
   <script src="js/bg.js"></script>

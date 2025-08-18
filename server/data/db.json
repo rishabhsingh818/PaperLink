@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": "admin-1",
+      "name": "Admin",
+      "email": "admin@paper.link",
+      "password": "$2a$10$qR2euPA/uzdzn2d9PTbKxeHdmsYWarb/1wKPvDMQduOviSd82YqDO",
+      "role": "admin",
+      "college": "PaperLink HQ",
+      "createdAt": 1755484090717,
+      "verified": true
+    }
+  ],
+  "papers": [],
+  "chats": [],
+  "notifications": [],
+  "colleges": [],
+  "approvals": []
+}

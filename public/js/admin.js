@@ -1,5 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const pendingPapers = document.getElementById('pending-papers');
+  const collegesList = document.getElementById('colleges-list');
+  const importForm = document.getElementById('import-colleges-form');
+  const fileInput = document.getElementById('colleges-file');
+  const fileTrigger = document.getElementById('colleges-trigger');
+  const fileName = document.getElementById('colleges-file-name');
+  const importStatus = document.getElementById('import-status');
 
   function token() { return localStorage.getItem('token') || ''; }
 
@@ -23,6 +29,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     `).join('');
   }
 
+  async function loadColleges() {
+    const res = await api('/admin/colleges');
+    const list = res.colleges || [];
+    collegesList.innerHTML = list.map(c => `
+      <div class="item glass">
+        <h4>${c.name}</h4>
+        <div class="meta">${[c.university,c.city,c.state].filter(Boolean).join(' • ')}</div>
+      </div>
+    `).join('');
+  }
+
   window.approvePaper = async (id) => {
     await api(`/papers/admin/${id}/approve`, { method: 'POST' });
     loadPendingPapers();
@@ -38,5 +55,27 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.location.href = '/login.html';
   });
 
+  if (fileTrigger) fileTrigger.addEventListener('click', () => fileInput.click());
+  if (fileInput) fileInput.addEventListener('change', () => {
+    fileName.textContent = fileInput.files && fileInput.files[0] ? fileInput.files[0].name : 'No file chosen';
+  });
+
+  if (importForm) importForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!fileInput.files || !fileInput.files[0]) return;
+    const fd = new FormData();
+    fd.append('file', fileInput.files[0]);
+    importStatus.textContent = 'Importing...';
+    const res = await fetch('/api/admin/colleges/import', { method: 'POST', headers: { Authorization: 'Bearer ' + token() }, body: fd });
+    const data = await res.json();
+    if (data.ok) {
+      importStatus.textContent = `Imported ${data.imported}. Total: ${data.total}.`;
+      await loadColleges();
+    } else {
+      importStatus.textContent = data.error || 'Failed';
+    }
+  });
+
   loadPendingPapers();
+  loadColleges();
 });

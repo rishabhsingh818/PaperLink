@@ -1,40 +1,101 @@
+/* Fancy font import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap');
+
 :root{
-  --bg1:#0f172a; --bg2:#1e293b; --accent:#7c3aed; --accent2:#06b6d4; --text:#e2e8f0; --muted:#94a3b8;
+  /* Navy/black/white palette */
+  --bg1:#0a1220; /* deep navy */
+  --bg2:#0b1f3a; /* navy */
+  --ink:#0b0d10; /* black-ish for cards */
+  --text:#f1f5f9; /* near-white */
+  --muted:#9aa4b2; /* subtle gray */
+  --accent:#1d4ed8; /* navy blue */
+  --accent2:#274690; /* darker navy for gradients */
 }
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0; font-family:'Inter',system-ui,Segoe UI,Roboto,Arial; color:var(--text);
-  background: radial-gradient(1200px 600px at 20% 10%, #1b1f3a, transparent),
-              radial-gradient(1200px 800px at 80% 0%, #0b2a35, transparent),
-              linear-gradient(135deg, var(--bg1), var(--bg2));
+  margin:0; font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; color:var(--text);
+  /* Solid black background as requested */
+  background:#000;
   overflow-x:hidden;
 }
 #bg{position:fixed;inset:0;z-index:-1}
 
+/* Liquid glass black cards */
 .glass{
-  background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
-  border: 1px solid rgba(255,255,255,.15);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  position:relative;
+  /* softer frosted glass over black */
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 14px 28px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border-radius: 18px;
 }
+.glass::before{
+  /* softer highlight bloom */
+  content:""; position:absolute; inset:1px; border-radius:inherit; pointer-events:none;
+  background: radial-gradient(120% 120% at 12% 10%, rgba(255,255,255,.18), transparent 42%);
+  mix-blend-mode: screen; opacity:.35; filter: blur(12px);
+}
+.glass::after{
+  content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+  background: linear-gradient(120deg, rgba(255,255,255,.10), transparent 42%, rgba(255,255,255,.06) 66%, transparent 86%);
+  mix-blend-mode: screen; opacity:.30; filter: blur(12px);
+}
+
 .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;margin:16px}
-.brand{font-weight:800;letter-spacing:.5px}
+.brand{font-weight:800;letter-spacing:.8px;font-size:32px;line-height:1; font-family:'Sora','Poppins',system-ui,Segoe UI,Roboto,Arial;}
+.brand, .brand a{
+  text-decoration:none;
+  background: linear-gradient(90deg,#ffffff 0%, #c7d2fe 55%, #e5e7eb 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  text-shadow: 0 2px 14px rgba(29,78,216,.25);
+}
 .nav .links{display:flex;gap:14px;align-items:center}
-.nav a{color:var(--text);text-decoration:none;opacity:.9}
+.nav .links a{color:var(--text);text-decoration:none;opacity:.9}
+/* Force light-gradient nav buttons to keep black text across states */
+.nav .links a.btn-light,
+.nav .links a.btn-light:visited,
+.nav .links a.btn-light:hover,
+.nav .links a.btn-light:active{
+  color:#0b0d10 !important;
+  text-shadow:none;
+  opacity:1;
+}
+
+/* Social icons */
+.social{display:flex;gap:10px;align-items:center;margin-left:8px}
+.social a{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));box-shadow:0 6px 16px rgba(0,0,0,.25);opacity:.95;transition:transform .15s ease, box-shadow .2s ease, opacity .2s}
+.social a:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,.32);opacity:1}
+.social svg{width:18px;height:18px;display:block}
 
 .hero{padding:120px 24px;text-align:center}
-.hero h1{font-size:56px;margin:0;line-height:1.05;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1{font-size:56px;margin:0;line-height:1.05;background:linear-gradient(90deg,#ffffff 0%, #9fb7ff 35%, #dbe7ff 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{max-width:720px;margin:12px auto 24px;color:var(--muted)}
 .cta{display:flex;gap:14px;justify-content:center}
 
-.btn{padding:10px 16px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;text-decoration:none;border:none;font-weight:600;box-shadow:0 6px 20px rgba(6,182,212,.3);cursor:pointer}
-.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);color:var(--text)}
+.btn{padding:10px 16px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;text-decoration:none;border:1px solid rgba(255,255,255,.08);font-weight:700;letter-spacing:.2px;box-shadow:0 8px 26px rgba(29,78,216,.35);cursor:pointer;transition:transform .15s ease, box-shadow .2s ease, opacity .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(29,78,216,.45)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.18);color:var(--text)}
+
+/* Brand white-stone gradient buttons with black text */
+.btn-light{
+  background: linear-gradient(90deg,#ffffff 0%, #c7d2fe 55%, #e5e7eb 100%);
+  color: #0b0d10;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 8px 22px rgba(0,0,0,.28);
+  font-weight: 800;
+}
+.btn-light:hover{box-shadow:0 12px 30px rgba(0,0,0,.36)}
+/* Ensure nav buttons keep black text on light gradient */
+.nav .btn-light{ color:#0b0d10; opacity:1; }
 
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:16px;margin:0 16px 60px}
 .card{padding:18px}
-.footer{margin:32px; padding:12px; text-align:center; color:var(--muted)}
+.footer{margin:32px 16px; padding:8px 0; text-align:center; color:var(--muted); font-size:12px}
 
 .container{max-width:1100px;margin:90px auto 60px;padding:0 16px}
 .search{display:grid;grid-template-columns:1fr 180px 160px auto;gap:10px;padding:14px}
@@ -43,15 +104,53 @@ body{
 .item .meta{color:var(--muted);font-size:12px}
 .row{display:flex;gap:10px}
 .chat{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow:auto}
-.msg{padding:10px;border-left:3px solid var(--accent)}
+.msg{padding:10px;border-left:3px solid #274690;background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));border-radius:8px}
 
-.auth{max-width:420px;margin:120px auto;padding:24px}
-.auth form{display:flex;flex-direction:column;gap:10px}
-input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--text);outline:none}
+.auth{max-width:480px;margin:120px auto;padding:28px}
+.auth form{display:flex;flex-direction:column;gap:12px}
+input,select,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.035));color:var(--text);outline:none;transition:border-color .15s ease, background .2s}
+input:focus,select:focus,textarea:focus{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06)}
 textarea{min-height:120px}
 .muted{color:var(--muted)}
 
-.badge{display:inline-block;background:rgba(255,255,255,.14);padding:4px 8px;border-radius:999px;margin-right:6px;font-size:12px}
+/* Ensure uniform look for fields in auth/upload cards */
+.auth input,
+.auth select{
+  min-height: 48px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.auth .filepicker .btn{min-height:48px;display:inline-flex;align-items:center}
+.auth input::placeholder,
+.auth textarea::placeholder{
+  color: var(--text);
+  opacity: .9;
+}
+
+/* Match select dropdown with theme: remove native arrow, add custom */
+select{
+  -webkit-appearance:none; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23c7d2fe' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 12px center; padding-right:40px;
+  color:var(--text);
+}
+/* On Windows/Chromium the open dropdown list uses a light background.
+  Make option text dark for readability while keeping the closed select text white. */
+select option{ color:#0b0d10; background:#fff; }
+select option:hover{ background:#eef2ff; color:#0b0d10; }
+select option:checked{ background:#dbeafe; color:#0b0d10; }
+/* Placeholder option tone */
+select option[disabled],
+select option[value=""]{ color:#94a3b8; }
+
+/* Themed file picker */
+.filepicker{display:flex;align-items:center;gap:12px}
+.filepicker .file-name{color:var(--muted);font-size:13px}
+.filepicker.error .file-name{color:#ef4444}
+.filepicker.error .btn{box-shadow:0 0 0 2px rgba(239,68,68,.45), 0 8px 22px rgba(0,0,0,.28); border-color: rgba(239,68,68,.6)}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,1px,1px);white-space:nowrap;border:0}
+
+.badge{display:inline-block;background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));padding:4px 8px;border-radius:999px;margin-right:6px;font-size:12px;border:1px solid rgba(255,255,255,.12)}
 
 @media (max-width:720px){
   .hero h1{font-size:38px}
