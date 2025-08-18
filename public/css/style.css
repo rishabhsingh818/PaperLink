@@ -55,15 +55,6 @@ body{
 }
 .nav .links{display:flex;gap:14px;align-items:center}
 .nav .links a{color:var(--text);text-decoration:none;opacity:.9}
-/* Force light-gradient nav buttons to keep black text across states */
-.nav .links a.btn-light,
-.nav .links a.btn-light:visited,
-.nav .links a.btn-light:hover,
-.nav .links a.btn-light:active{
-  color:#0b0d10 !important;
-  text-shadow:none;
-  opacity:1;
-}
 
 /* Social icons */
 .social{display:flex;gap:10px;align-items:center;margin-left:8px}

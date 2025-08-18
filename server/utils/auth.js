@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { nanoid } from 'nanoid';
 import { db } from '../index.js';
-import bcrypt from 'bcryptjs';
 
 const SECRET = process.env.JWT_SECRET || 'dev-secret';
 
@@ -33,8 +32,7 @@ export function requireAdmin(req, res, next) {
 export function createUser({ name, email, password, college, department, course, academicYear, year }) {
   const exists = db.users.find(u => u.email === email);
   if (exists) throw new Error('Email already registered');
-  const hash = bcrypt.hashSync(password, 10);
-  const user = { id: nanoid(), name, email, password: hash, college, department, course, academicYear, year: year ? Number(year) : undefined, role: 'user', createdAt: Date.now() };
+  const user = { id: nanoid(), name, email, password, college, department, course, academicYear, year: year ? Number(year) : undefined, role: 'user', createdAt: Date.now() };
   db.users.push(user);
   return user;
 }
